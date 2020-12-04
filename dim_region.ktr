@@ -428,8 +428,8 @@
     <created_user>-</created_user>
     <created_date>2020/12/04 12:59:50.162</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2020/12/04 13:28:04.507</modified_date>
-    <key_for_session_key/>
+    <modified_date>2020/12/04 20:49:48.827</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -492,6 +492,16 @@
   <order>
     <hop>
       <from>Get Region</from>
+      <to>Split fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Split fields</from>
+      <to>Row normaliser</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Row normaliser</from>
       <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
@@ -596,6 +606,164 @@
     </GUI>
   </step>
   <step>
+    <name>Split fields</name>
+    <type>FieldSplitter</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <splitfield>area</splitfield>
+    <delimiter>,</delimiter>
+    <enclosure/>
+    <fields>
+      <field>
+        <name>a</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>b</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>c</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>d</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+      <field>
+        <name>e</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Row normaliser</name>
+    <type>Normaliser</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <typefield>typefield</typefield>
+    <fields>
+      <field>
+        <name>a</name>
+        <value>a</value>
+        <norm>area</norm>
+      </field>
+      <field>
+        <name>b</name>
+        <value>b</value>
+        <norm>area</norm>
+      </field>
+      <field>
+        <name>c</name>
+        <value>c</value>
+        <norm>area</norm>
+      </field>
+      <field>
+        <name>d</name>
+        <value>d</value>
+        <norm>area</norm>
+      </field>
+      <field>
+        <name>e</name>
+        <value>e</value>
+        <norm>area</norm>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Combination lookup/update</name>
     <type>CombinationLookup</type>
     <description/>
@@ -626,8 +794,8 @@
       </key>
       <return>
         <name>region_key</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
+        <creation_method>autoinc</creation_method>
+        <use_autoinc>Y</use_autoinc>
       </return>
     </fields>
     <sequence/>
@@ -641,7 +809,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
+      <xloc>624</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
