@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2020 at 10:14 AM
+-- Generation Time: Dec 04, 2020 at 03:09 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -145,128 +145,130 @@ CREATE TABLE `dim_patient` (
   `name` tinytext DEFAULT NULL,
   `Address` varchar(30) DEFAULT NULL,
   `Phone` varchar(30) DEFAULT NULL,
-  `insuranceID` int(11) DEFAULT NULL,
-  `version` int(11) DEFAULT NULL,
-  `date_from` datetime DEFAULT NULL,
-  `date_to` datetime DEFAULT NULL,
+  `InsuranceID` int(11) DEFAULT NULL,
   `patient-gender` tinytext DEFAULT NULL,
+  `patient-age` double DEFAULT NULL,
   `patient-occupation-subcategory` tinytext DEFAULT NULL,
   `occupation-major-group` tinytext DEFAULT NULL,
   `patient-isfromabroad` tinytext DEFAULT NULL,
-  `patient-age` double DEFAULT NULL,
-  `patient-singapore-area` tinytext DEFAULT NULL
+  `patient-singapore-area` tinytext DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `date_from` datetime DEFAULT NULL,
+  `date_to` datetime DEFAULT NULL,
+  `region_key` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `dim_patient`
 --
 
-INSERT INTO `dim_patient` (`patient_key`, `name`, `Address`, `Phone`, `insuranceID`, `version`, `date_from`, `date_to`, `patient-gender`, `patient-occupation-subcategory`, `occupation-major-group`, `patient-isfromabroad`, `patient-age`, `patient-singapore-area`) VALUES
-(1, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'John Smith', '42 Foobar Lane', '555-0256', 68476213, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Managers', 'GROUP1', 'Y', 35, NULL),
-(3, 'Grace Ritchie', '37 Snafu Drive', '555-0512', 36546321, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Professionals', 'GROUP2', 'Y', 38, NULL),
-(4, 'Random J. Patient', '101 Omgbbq Street', '555-1204', 65465421, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Craft and related trades workers', 'GROUP7', 'N', 40, 'Bukit Merah'),
-(5, 'Dennis Doe', '1100 Foobaz Avenue', '555-2048', 68421879, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Technicians', 'GROUP3', 'N', 25, 'Yishun'),
-(6, 'Damian Hays', '156-2656 Ornare Av.', '136-7328', 68421880, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Technicians', 'GROUP3', 'Y', 26, NULL),
-(7, 'Karly Jackson', '975-5765 Ac Avenue', '010-2391', 68421881, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Armed forces occupations', 'GROUP10', 'N', 45, 'Woodlands'),
-(8, 'Kato Luna', '643-4443 Cursus. Rd.', '860-3924', 68421882, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Professionals', 'GROUP2', 'N', 55, 'Tampines'),
-(9, 'Xandra Skinner', '492-149 Viverra. Street', '760-0449', 68421883, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Professionals', 'GROUP2', 'N', 56, 'Toa Payoh'),
-(10, 'Anthony Moses', '819-6082 A Street', '320-2649', 68421884, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Craft and related trades workers', 'GROUP7', 'N', 21, 'Bukit Panjang'),
-(11, 'Daryl Decker', 'Ap #914-7548 Cursus St.', '203-3315', 68421885, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Service and sales workers', 'GROUP5', 'N', 22, 'Bukit Panjang'),
-(12, 'Zelda Macias', '9418 Ac Rd.', '226-1378', 68421886, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 28, 'Choa Chu Kang'),
-(13, 'Guy Cash', '996-3237 Aliquet. St.', '448-3875', 68421887, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Professionals', 'GROUP2', 'Y', 28, NULL),
-(14, 'Dolan Hamilton', '2930 Molestie St.', '136-0958', 68421888, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Professionals', 'GROUP2', 'Y', 26, NULL),
-(15, 'Thane Byers', 'P.O. Box 615, 7599 Semper St.', '860-2025', 68421889, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Technicians', 'GROUP3', 'N', 64, 'Tampines'),
-(16, 'Boris Howard', '906-8071 Orci St.', '252-1109', 68421890, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Technicians', 'GROUP3', 'Y', 54, NULL),
-(17, 'Elizabeth Chan', '9900 Eget Road', '076-7364', 68421891, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'N', 44, 'Bedok'),
-(18, 'Jelani Snow', '960-2567 Urna. Rd.', '491-8057', 68421892, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Service and sales workers', 'GROUP5', 'N', 24, 'Kallang'),
-(19, 'Scott Levy', 'Ap #449-3704 Fringilla Road', '565-4449', 68421893, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Professionals', 'GROUP2', 'Y', 34, NULL),
-(20, 'Maris Tillman', 'Ap #347-131 Sit Ave', '948-4057', 68421894, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Managers', 'GROUP1', 'N', 33, 'Kallang'),
-(21, 'Mara Walton', '5709 Justo Rd.', '222-5502', 68421895, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'Y', 35, NULL),
-(22, 'Jackson Beck', '6255 Massa. Avenue', '020-3493', 68421896, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'N', 60, 'Ang Mo Kio'),
-(23, 'Darius Cooper', 'Ap #960-4409 Mauris Rd.', '868-4161', 68421897, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 29, 'Bukit Batok'),
-(24, 'Dillon Hess', '2301 Amet Rd.', '055-4215', 68421898, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Technicians', 'GROUP3', 'Y', 32, NULL),
-(25, 'Daniel Chambers', '618 Ultrices Av.', '906-1257', 68421899, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'N', 65, 'Kallang'),
-(26, 'Stephanie Mueller', 'Ap #573-2893 Massa. Street', '758-8606', 68421900, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 26, 'Ang Mo Kio'),
-(27, 'Garrett Massey', 'Ap #980-4115 At, Ave', '085-5007', 68421901, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Managers', 'GROUP1', 'N', 36, 'Bukit Merah'),
-(28, 'Gay Olson', 'Ap #439-9506 Laoreet, Street', '415-9560', 68421902, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Technicians', 'GROUP3', 'Y', 32, NULL),
-(29, 'Xaviera Noble', '731-8219 Aliquet St.', '392-0206', 68421903, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Technicians', 'GROUP3', 'N', 45, 'Punggol'),
-(30, 'Montana Weaver', 'Ap #710-5526 A, St.', '815-8804', 68421904, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Managers', 'GROUP1', 'Y', 35, NULL),
-(31, 'Clarke Pennington', '2821 Ridiculus Street', '177-5796', 68421905, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Technicians', 'GROUP3', 'Y', 55, NULL),
-(32, 'Roanna Gentry', 'P.O. Box 266, 1853 Scelerisque', '689-0008', 68421906, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'Y', 27, NULL),
-(33, 'Lev Schneider', '4116 Magna. St.', '551-6013', 68421907, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Managers', 'GROUP1', 'Y', 40, NULL),
-(34, 'Troy Underwood', '3330 Nibh. St.', '857-4502', 68421908, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 42, 'Pasir Ris'),
-(35, 'Zelda Sherman', 'P.O. Box 429, 7338 Nam Ave', '082-7403', 68421909, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Service and sales workers', 'GROUP5', 'N', 27, 'Serangoon'),
-(36, 'Jesse Kerr', '677-1698 Justo Ave', '520-6690', 68421910, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Managers', 'GROUP1', 'Y', 41, NULL),
-(37, 'Tashya Martin', '297-6150 Velit. Rd.', '992-7095', 68421911, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'N', 63, 'Yishun'),
-(38, 'Dominic Moran', '561-2490 Ac Ave', '120-5936', 68421912, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Clerical support workers', 'GROUP4', 'N', 44, 'Woodlands'),
-(39, 'Colorado Massey', '8601 Erat St.', '940-3349', 68421913, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Elementary occupations', 'GROUP9', 'N', 25, 'Bukit Merah'),
-(40, 'Jamal Dickson', '883-1729 Semper. Ave', '517-0124', 68421914, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Clerical support workers', 'GROUP4', 'N', 30, 'Yishun'),
-(41, 'Lynn Juarez', '3393 Dolor Rd.', '744-5123', 68421915, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 31, 'Toa Payoh'),
-(42, 'Austin Lindsey', 'P.O. Box 745, 3393 Pulvinar Av', '898-5019', 68421916, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Elementary occupations', 'GROUP9', 'N', 24, 'Woodlands'),
-(43, 'Vivien Melendez', '638-7555 Morbi Av.', '993-5490', 68421917, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'Y', 32, NULL),
-(44, 'Merritt Howell', 'Ap #424-1895 Dui Ave', '458-3638', 68421918, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Elementary occupations', 'GROUP9', 'Y', 25, NULL),
-(45, 'Tatum Livingston', 'P.O. Box 215, 9497 Justo Ave', '361-6793', 68421919, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Elementary occupations', 'GROUP9', 'N', 22, 'Bukit Panjang'),
-(46, 'Tashya Mendez', 'Ap #773-7842 Tempor Avenue', '143-4973', 68421920, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Elementary occupations', 'GROUP9', 'N', 23, 'Bukit Panjang'),
-(47, 'Naomi Conway', '991-9863 Integer St.', '959-5430', 68421921, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 33, 'Choa Chu Kang'),
-(48, 'Clark Giles', '951-4646 Dictum. Av.', '596-7761', 68421922, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Service and sales workers', 'GROUP5', 'N', 29, 'Hougang'),
-(49, 'Jocelyn Rollins', 'P.O. Box 642, 5967 Dui St.', '649-5796', 68421923, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Managers', 'GROUP1', 'Y', 42, NULL),
-(50, 'Carl Prince', '4884 Ultrices Rd.', '360-8619', 68421924, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 45, 'Tampines'),
-(51, 'Keane Mckinney', 'Ap #720-4584 Enim Rd.', '115-4196', 68421925, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Managers', 'GROUP1', 'Y', 45, NULL),
-(52, 'Adrienne Foley', '959-6534 Posuere Av.', '918-2745', 68421926, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'Y', 50, NULL),
-(53, 'Noelle Mcclure', 'P.O. Box 107, 7420 Nunc Ave', '454-6452', 68421927, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 21, 'Kallang'),
-(54, 'Montana Kaufman', 'Ap #848-3035 Quam Rd.', '045-9140', 68421928, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Service and sales workers', 'GROUP5', 'Y', 26, NULL),
-(55, 'Hamish Farley', '895-9905 Nec Ave', '425-9480', 68421929, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'Y', 45, NULL),
-(56, 'Mikayla Hebert', '3515 Ullamcorper, St.', '593-8052', 68421930, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 22, 'Bedok'),
-(57, 'Winter Peck', 'Ap #997-8390 Nullam St.', '525-5040', 68421931, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Service and sales workers', 'GROUP5', 'N', 23, 'Ang Mo Kio'),
-(58, 'Sopoline Clayton', '933-6221 Lectus, Av.', '389-7295', 68421932, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 28, 'Bukit Batok'),
-(59, 'Amir Madden', '727-5043 Proin Av.', '761-0978', 68421933, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Service and sales workers', 'GROUP5', 'N', 23, 'Punggol'),
-(60, 'Glenna Contreras', '464-2592 Sodales St.', '183-8958', 68421934, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Technicians', 'GROUP3', 'N', 54, 'Kallang'),
-(61, 'Nasim Carroll', '1955 Mauris. Road', '822-6176', 68421935, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Technicians', 'GROUP3', 'Y', 58, NULL),
-(62, 'Mariko Kirkland', 'P.O. Box 835, 836 Quisque Av.', '065-1857', 68421936, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Technicians', 'GROUP3', 'Y', 60, NULL),
-(63, 'Timon Holmes', 'P.O. Box 889, 3566 Eget St.', '520-8106', 68421937, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'N', 55, 'Sembawang'),
-(64, 'Palmer Quinn', '354-8004 Mauris Street', '578-9933', 68421938, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Service and sales workers', 'GROUP5', 'N', 26, 'Punggol'),
-(65, 'Alma Wiggins', 'P.O. Box 585, 2796 Eu Ave', '015-0460', 68421939, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Plant and machine operators and assemblers', 'GROUP8', 'N', 36, 'Geylang'),
-(66, 'Quincy Smith', '910-7007 Gravida Av.', '055-1805', 68421940, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Professionals', 'GROUP2', 'Y', 38, NULL),
-(67, 'Azalia Alston', 'P.O. Box 747, 2039 Tempor, St.', '317-0137', 68421941, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Plant and machine operators and assemblers', 'GROUP8', 'N', 39, 'Queenstown'),
-(68, 'Lareina Ratliff', 'P.O. Box 314, 5242 Sem Road', '007-2548', 68421942, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Plant and machine operators and assemblers', 'GROUP8', 'N', 40, 'Queenstown'),
-(69, 'Adena Whitaker', '7486 Consectetuer Road', '874-5171', 68421943, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Technicians', 'GROUP3', 'N', 71, 'Pasir Ris'),
-(70, 'Autumn Mcfadden', '765-4770 Mauris Avenue', '237-5096', 68421944, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Elementary occupations', 'GROUP9', 'N', 24, 'Serangoon'),
-(71, 'Otto Walker', 'P.O. Box 615, 9901 Proin St.', '843-1006', 68421945, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Service and sales workers', 'GROUP5', 'N', 26, 'Geylang'),
-(72, 'Illana Duke', '349-2412 Sed, Rd.', '373-1072', 68421946, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Service and sales workers', 'GROUP5', 'Y', 28, NULL),
-(73, 'Anne Larsen', '447-7398 Sem, St.', '796-5920', 68421947, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Technicians', 'GROUP3', 'Y', 61, NULL),
-(74, 'Burke Bradshaw', '5717 Nam St.', '357-1988', 68421948, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Professionals', 'GROUP2', 'Y', 37, NULL),
-(75, 'Cameron Clay', '1667 Urna. Avenue', '463-3346', 68421949, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Service and sales workers', 'GROUP5', 'N', 29, 'Bukit Merah'),
-(76, 'Myles Lott', 'Ap #299-3208 Taciti Ave', '782-5751', 68421950, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Craft and related trades workers', 'GROUP7', 'N', 25, 'Yishun'),
-(77, 'Duncan Huber', '389 Libero. Road', '935-1029', 68421951, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Technicians', 'GROUP3', 'N', 66, 'Toa Payoh'),
-(78, 'Dylan Brown', '746-9985 Lacus. Street', '538-5767', 68421952, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Service and sales workers', 'GROUP5', 'N', 29, 'Woodlands'),
-(79, 'Amal Velasquez', '513-2360 Quis Rd.', '407-6084', 68421953, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Craft and related trades workers', 'GROUP7', 'N', 26, 'Tampines'),
-(80, 'Kyla Ray', 'Ap #368-6233 Tellus St.', '942-6027', 68421954, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Professionals', 'GROUP2', 'Y', 37, NULL),
-(81, 'Gay Beard', 'P.O. Box 804, 2864 Natoque Rd.', '308-6101', 68421955, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Craft and related trades workers', 'GROUP7', 'N', 25, 'Serangoon'),
-(82, 'Xerxes Browning', '736-1523 Et Rd.', '786-5441', 68421956, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Craft and related trades workers', 'GROUP7', 'N', 21, 'Geylang'),
-(83, 'Asher Stanley', 'P.O. Box 694, 6194 Fringilla A', '695-9415', 68421957, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'Y', 29, NULL),
-(84, 'Neve Harrison', '673-5937 Id Avenue', '548-0900', 68421958, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Elementary occupations', 'GROUP9', 'Y', 25, NULL),
-(85, 'Craig Tran', '978-3036 Semper Rd.', '728-7989', 68421959, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Craft and related trades workers', 'GROUP7', 'N', 23, 'Bukit Merah'),
-(86, 'Reuben Burgess', '938 Enim Rd.', '952-1926', 68421960, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Clerical support workers', 'GROUP4', 'N', 30, 'Tampines'),
-(87, 'Brianna Abbott', 'P.O. Box 225, 3145 Suscipit St', '252-6313', 68421961, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Armed forces occupations', 'GROUP10', 'N', 35, 'Hougang'),
-(88, 'Clio Stanton', '7714 Et Rd.', '622-6400', 68421962, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Service and sales workers', 'GROUP5', 'Y', 30, NULL),
-(89, 'George Morales', '952-6477 Habitant St.', '175-9048', 68421963, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Service and sales workers', 'GROUP5', 'Y', 35, NULL),
-(90, 'Meghan Stafford', 'Ap #856-1275 Nunc, Rd.', '676-7976', 68421964, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Service and sales workers', 'GROUP5', 'N', 35, 'Bedok'),
-(91, 'Preston Clemons', '578-2058 Non, Avenue', '019-7007', 68421965, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Service and sales workers', 'GROUP5', 'Y', 34, NULL),
-(92, 'Porter Fowler', '4397 Sit St.', '816-0910', 68421966, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Professionals', 'GROUP2', 'Y', 39, NULL),
-(93, 'Judith Newton', 'P.O. Box 877, 1385 Fermentum R', '280-5749', 68421967, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Service and sales workers', 'GROUP5', 'N', 34, 'Ang Mo Kio'),
-(94, 'Linda Hogan', 'P.O. Box 172, 6371 Dui St.', '853-7325', 68421968, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 31, 'Bukit Batok'),
-(95, 'Jane Adams', 'Ap #658-2243 Magna Av.', '611-2089', 68421969, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Service and sales workers', 'GROUP5', 'Y', 36, NULL),
-(96, 'Jane Daniels', 'Ap #702-9417 Amet, Rd.', '822-2670', 68421970, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Elementary occupations', 'GROUP9', 'N', 45, 'Kallang'),
-(97, 'Gisela Middleton', '975-5195 Accumsan Road', '221-0312', 68421971, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Clerical support workers', 'GROUP4', 'N', 30, 'Ang Mo Kio'),
-(98, 'Leilani Cortez', '4868 Elit Rd.', '918-2847', 68421972, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Professionals', 'GROUP2', 'N', 40, 'Bukit Merah'),
-(99, 'Indira Hickman', 'P.O. Box 973, 5876 Elit Ave', '856-1389', 68421973, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Elementary occupations', 'GROUP9', 'Y', 24, NULL),
-(100, 'Hedley Gutierrez', '532-2364 Sit Avenue', '517-0875', 68421974, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Professionals', 'GROUP2', 'Y', 48, NULL),
-(101, 'Jacob Flores', '5765 Imperdiet Rd.', '050-1252', 68421975, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Professionals', 'GROUP2', 'N', 44, 'Geylang'),
-(102, 'Troy Joseph', 'Ap #987-3561 Amet Street', '542-7519', 68421976, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Armed forces occupations', 'GROUP10', 'N', 25, 'Bukit Merah'),
-(103, 'Murphy Watts', '725-6461 Ridiculus Av.', '723-3569', 68421977, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Clerical support workers', 'GROUP4', 'Y', 29, NULL),
-(104, 'Clinton Foreman', '6318 Arcu. Rd.', '267-8604', 68421978, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'M', 'Service and sales workers', 'GROUP5', 'Y', 38, NULL),
-(105, 'Jillian Wood', 'P.O. Box 922, 1851 Non Avenue', '007-2188', 68421979, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 'F', 'Professionals', 'GROUP2', 'N', 45, 'Pasir Ris');
+INSERT INTO `dim_patient` (`patient_key`, `name`, `Address`, `Phone`, `InsuranceID`, `patient-gender`, `patient-age`, `patient-occupation-subcategory`, `occupation-major-group`, `patient-isfromabroad`, `patient-singapore-area`, `version`, `date_from`, `date_to`, `region_key`) VALUES
+(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
+(2, 'John Smith', '42 Foobar Lane', '555-0256', 68476213, 'M', 35, 'Managers', 'GROUP1', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(3, 'Grace Ritchie', '37 Snafu Drive', '555-0512', 36546321, 'F', 38, 'Professionals', 'GROUP2', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(4, 'Random J. Patient', '101 Omgbbq Street', '555-1204', 65465421, 'F', 40, 'Craft and related trades workers', 'GROUP7', 'N', 'Bukit Merah', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 13),
+(5, 'Dennis Doe', '1100 Foobaz Avenue', '555-2048', 68421879, 'M', 25, 'Technicians', 'GROUP3', 'N', 'Yishun', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 23),
+(6, 'Damian Hays', '156-2656 Ornare Av.', '136-7328', 68421880, 'M', 26, 'Technicians', 'GROUP3', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(7, 'Karly Jackson', '975-5765 Ac Avenue', '010-2391', 68421881, 'F', 45, 'Armed forces occupations', 'GROUP10', 'N', 'Woodlands', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 10),
+(8, 'Kato Luna', '643-4443 Cursus. Rd.', '860-3924', 68421882, 'F', 55, 'Professionals', 'GROUP2', 'N', 'Tampines', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 24),
+(9, 'Xandra Skinner', '492-149 Viverra. Street', '760-0449', 68421883, 'F', 56, 'Professionals', 'GROUP2', 'N', 'Toa Payoh', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 25),
+(10, 'Anthony Moses', '819-6082 A Street', '320-2649', 68421884, 'M', 21, 'Craft and related trades workers', 'GROUP7', 'N', 'Bukit Panjang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 7),
+(11, 'Daryl Decker', 'Ap #914-7548 Cursus St.', '203-3315', 68421885, 'M', 22, 'Service and sales workers', 'GROUP5', 'N', 'Bukit Panjang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 7),
+(12, 'Zelda Macias', '9418 Ac Rd.', '226-1378', 68421886, 'F', 28, 'Clerical support workers', 'GROUP4', 'N', 'Choa Chu Kang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 26),
+(13, 'Guy Cash', '996-3237 Aliquet. St.', '448-3875', 68421887, 'M', 28, 'Professionals', 'GROUP2', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(14, 'Dolan Hamilton', '2930 Molestie St.', '136-0958', 68421888, 'F', 26, 'Professionals', 'GROUP2', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(15, 'Thane Byers', 'P.O. Box 615, 7599 Semper St.', '860-2025', 68421889, 'M', 64, 'Technicians', 'GROUP3', 'N', 'Tampines', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 24),
+(16, 'Boris Howard', '906-8071 Orci St.', '252-1109', 68421890, 'M', 54, 'Technicians', 'GROUP3', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(17, 'Elizabeth Chan', '9900 Eget Road', '076-7364', 68421891, 'F', 44, 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'N', 'Bedok', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 1),
+(18, 'Jelani Snow', '960-2567 Urna. Rd.', '491-8057', 68421892, 'F', 24, 'Service and sales workers', 'GROUP5', 'N', 'Kallang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 27),
+(19, 'Scott Levy', 'Ap #449-3704 Fringilla Road', '565-4449', 68421893, 'M', 34, 'Professionals', 'GROUP2', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(20, 'Maris Tillman', 'Ap #347-131 Sit Ave', '948-4057', 68421894, 'F', 33, 'Managers', 'GROUP1', 'N', 'Kallang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 27),
+(21, 'Mara Walton', '5709 Justo Rd.', '222-5502', 68421895, 'F', 35, 'Clerical support workers', 'GROUP4', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(22, 'Jackson Beck', '6255 Massa. Avenue', '020-3493', 68421896, 'M', 60, 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'N', 'Ang Mo Kio', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 28),
+(23, 'Darius Cooper', 'Ap #960-4409 Mauris Rd.', '868-4161', 68421897, 'F', 29, 'Clerical support workers', 'GROUP4', 'N', 'Bukit Batok', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 29),
+(24, 'Dillon Hess', '2301 Amet Rd.', '055-4215', 68421898, 'M', 32, 'Technicians', 'GROUP3', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(25, 'Daniel Chambers', '618 Ultrices Av.', '906-1257', 68421899, 'M', 65, 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'N', 'Kallang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 27),
+(26, 'Stephanie Mueller', 'Ap #573-2893 Massa. Street', '758-8606', 68421900, 'F', 26, 'Clerical support workers', 'GROUP4', 'N', 'Ang Mo Kio', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 28),
+(27, 'Garrett Massey', 'Ap #980-4115 At, Ave', '085-5007', 68421901, 'F', 36, 'Managers', 'GROUP1', 'N', 'Bukit Merah', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 13),
+(28, 'Gay Olson', 'Ap #439-9506 Laoreet, Street', '415-9560', 68421902, 'F', 32, 'Technicians', 'GROUP3', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(29, 'Xaviera Noble', '731-8219 Aliquet St.', '392-0206', 68421903, 'F', 45, 'Technicians', 'GROUP3', 'N', 'Punggol', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 30),
+(30, 'Montana Weaver', 'Ap #710-5526 A, St.', '815-8804', 68421904, 'F', 35, 'Managers', 'GROUP1', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(31, 'Clarke Pennington', '2821 Ridiculus Street', '177-5796', 68421905, 'F', 55, 'Technicians', 'GROUP3', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(32, 'Roanna Gentry', 'P.O. Box 266, 1853 Scelerisque', '689-0008', 68421906, 'F', 27, 'Clerical support workers', 'GROUP4', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(33, 'Lev Schneider', '4116 Magna. St.', '551-6013', 68421907, 'F', 40, 'Managers', 'GROUP1', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(34, 'Troy Underwood', '3330 Nibh. St.', '857-4502', 68421908, 'F', 42, 'Clerical support workers', 'GROUP4', 'N', 'Pasir Ris', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 31),
+(35, 'Zelda Sherman', 'P.O. Box 429, 7338 Nam Ave', '082-7403', 68421909, 'F', 27, 'Service and sales workers', 'GROUP5', 'N', 'Serangoon', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 32),
+(36, 'Jesse Kerr', '677-1698 Justo Ave', '520-6690', 68421910, 'F', 41, 'Managers', 'GROUP1', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(37, 'Tashya Martin', '297-6150 Velit. Rd.', '992-7095', 68421911, 'F', 63, 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'N', 'Yishun', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 23),
+(38, 'Dominic Moran', '561-2490 Ac Ave', '120-5936', 68421912, 'M', 44, 'Clerical support workers', 'GROUP4', 'N', 'Woodlands', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 10),
+(39, 'Colorado Massey', '8601 Erat St.', '940-3349', 68421913, 'F', 25, 'Elementary occupations', 'GROUP9', 'N', 'Bukit Merah', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 13),
+(40, 'Jamal Dickson', '883-1729 Semper. Ave', '517-0124', 68421914, 'M', 30, 'Clerical support workers', 'GROUP4', 'N', 'Yishun', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 23),
+(41, 'Lynn Juarez', '3393 Dolor Rd.', '744-5123', 68421915, 'F', 31, 'Clerical support workers', 'GROUP4', 'N', 'Toa Payoh', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 25),
+(42, 'Austin Lindsey', 'P.O. Box 745, 3393 Pulvinar Av', '898-5019', 68421916, 'M', 24, 'Elementary occupations', 'GROUP9', 'N', 'Woodlands', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 10),
+(43, 'Vivien Melendez', '638-7555 Morbi Av.', '993-5490', 68421917, 'F', 32, 'Clerical support workers', 'GROUP4', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(44, 'Merritt Howell', 'Ap #424-1895 Dui Ave', '458-3638', 68421918, 'F', 25, 'Elementary occupations', 'GROUP9', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(45, 'Tatum Livingston', 'P.O. Box 215, 9497 Justo Ave', '361-6793', 68421919, 'F', 22, 'Elementary occupations', 'GROUP9', 'N', 'Bukit Panjang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 7),
+(46, 'Tashya Mendez', 'Ap #773-7842 Tempor Avenue', '143-4973', 68421920, 'F', 23, 'Elementary occupations', 'GROUP9', 'N', 'Bukit Panjang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 7),
+(47, 'Naomi Conway', '991-9863 Integer St.', '959-5430', 68421921, 'F', 33, 'Clerical support workers', 'GROUP4', 'N', 'Choa Chu Kang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 26),
+(48, 'Clark Giles', '951-4646 Dictum. Av.', '596-7761', 68421922, 'F', 29, 'Service and sales workers', 'GROUP5', 'N', 'Hougang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 33),
+(49, 'Jocelyn Rollins', 'P.O. Box 642, 5967 Dui St.', '649-5796', 68421923, 'F', 42, 'Managers', 'GROUP1', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(50, 'Carl Prince', '4884 Ultrices Rd.', '360-8619', 68421924, 'F', 45, 'Clerical support workers', 'GROUP4', 'N', 'Tampines', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 24),
+(51, 'Keane Mckinney', 'Ap #720-4584 Enim Rd.', '115-4196', 68421925, 'F', 45, 'Managers', 'GROUP1', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(52, 'Adrienne Foley', '959-6534 Posuere Av.', '918-2745', 68421926, 'F', 50, 'Clerical support workers', 'GROUP4', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(53, 'Noelle Mcclure', 'P.O. Box 107, 7420 Nunc Ave', '454-6452', 68421927, 'F', 21, 'Clerical support workers', 'GROUP4', 'N', 'Kallang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 27),
+(54, 'Montana Kaufman', 'Ap #848-3035 Quam Rd.', '045-9140', 68421928, 'F', 26, 'Service and sales workers', 'GROUP5', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(55, 'Hamish Farley', '895-9905 Nec Ave', '425-9480', 68421929, 'F', 45, 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(56, 'Mikayla Hebert', '3515 Ullamcorper, St.', '593-8052', 68421930, 'F', 22, 'Clerical support workers', 'GROUP4', 'N', 'Bedok', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 1),
+(57, 'Winter Peck', 'Ap #997-8390 Nullam St.', '525-5040', 68421931, 'F', 23, 'Service and sales workers', 'GROUP5', 'N', 'Ang Mo Kio', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 28),
+(58, 'Sopoline Clayton', '933-6221 Lectus, Av.', '389-7295', 68421932, 'F', 28, 'Clerical support workers', 'GROUP4', 'N', 'Bukit Batok', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 29),
+(59, 'Amir Madden', '727-5043 Proin Av.', '761-0978', 68421933, 'M', 23, 'Service and sales workers', 'GROUP5', 'N', 'Punggol', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 30),
+(60, 'Glenna Contreras', '464-2592 Sodales St.', '183-8958', 68421934, 'F', 54, 'Technicians', 'GROUP3', 'N', 'Kallang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 27),
+(61, 'Nasim Carroll', '1955 Mauris. Road', '822-6176', 68421935, 'M', 58, 'Technicians', 'GROUP3', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(62, 'Mariko Kirkland', 'P.O. Box 835, 836 Quisque Av.', '065-1857', 68421936, 'F', 60, 'Technicians', 'GROUP3', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(63, 'Timon Holmes', 'P.O. Box 889, 3566 Eget St.', '520-8106', 68421937, 'M', 55, 'Skilled agricultural, forestry and fishery workers', 'GROUP6', 'N', 'Sembawang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 34),
+(64, 'Palmer Quinn', '354-8004 Mauris Street', '578-9933', 68421938, 'M', 26, 'Service and sales workers', 'GROUP5', 'N', 'Punggol', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 30),
+(65, 'Alma Wiggins', 'P.O. Box 585, 2796 Eu Ave', '015-0460', 68421939, 'F', 36, 'Plant and machine operators and assemblers', 'GROUP8', 'N', 'Geylang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 35),
+(66, 'Quincy Smith', '910-7007 Gravida Av.', '055-1805', 68421940, 'M', 38, 'Professionals', 'GROUP2', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(67, 'Azalia Alston', 'P.O. Box 747, 2039 Tempor, St.', '317-0137', 68421941, 'F', 39, 'Plant and machine operators and assemblers', 'GROUP8', 'N', 'Queenstown', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 36),
+(68, 'Lareina Ratliff', 'P.O. Box 314, 5242 Sem Road', '007-2548', 68421942, 'F', 40, 'Plant and machine operators and assemblers', 'GROUP8', 'N', 'Queenstown', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 36),
+(69, 'Adena Whitaker', '7486 Consectetuer Road', '874-5171', 68421943, 'F', 71, 'Technicians', 'GROUP3', 'N', 'Pasir Ris', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 31),
+(70, 'Autumn Mcfadden', '765-4770 Mauris Avenue', '237-5096', 68421944, 'F', 24, 'Elementary occupations', 'GROUP9', 'N', 'Serangoon', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 32),
+(71, 'Otto Walker', 'P.O. Box 615, 9901 Proin St.', '843-1006', 68421945, 'M', 26, 'Service and sales workers', 'GROUP5', 'N', 'Geylang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 35),
+(72, 'Illana Duke', '349-2412 Sed, Rd.', '373-1072', 68421946, 'F', 28, 'Service and sales workers', 'GROUP5', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(73, 'Anne Larsen', '447-7398 Sem, St.', '796-5920', 68421947, 'F', 61, 'Technicians', 'GROUP3', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(74, 'Burke Bradshaw', '5717 Nam St.', '357-1988', 68421948, 'M', 37, 'Professionals', 'GROUP2', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(75, 'Cameron Clay', '1667 Urna. Avenue', '463-3346', 68421949, 'F', 29, 'Service and sales workers', 'GROUP5', 'N', 'Bukit Merah', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 13),
+(76, 'Myles Lott', 'Ap #299-3208 Taciti Ave', '782-5751', 68421950, 'F', 25, 'Craft and related trades workers', 'GROUP7', 'N', 'Yishun', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 23),
+(77, 'Duncan Huber', '389 Libero. Road', '935-1029', 68421951, 'M', 66, 'Technicians', 'GROUP3', 'N', 'Toa Payoh', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 25),
+(78, 'Dylan Brown', '746-9985 Lacus. Street', '538-5767', 68421952, 'F', 29, 'Service and sales workers', 'GROUP5', 'N', 'Woodlands', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 10),
+(79, 'Amal Velasquez', '513-2360 Quis Rd.', '407-6084', 68421953, 'F', 26, 'Craft and related trades workers', 'GROUP7', 'N', 'Tampines', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 24),
+(80, 'Kyla Ray', 'Ap #368-6233 Tellus St.', '942-6027', 68421954, 'F', 37, 'Professionals', 'GROUP2', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(81, 'Gay Beard', 'P.O. Box 804, 2864 Natoque Rd.', '308-6101', 68421955, 'M', 25, 'Craft and related trades workers', 'GROUP7', 'N', 'Serangoon', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 32),
+(82, 'Xerxes Browning', '736-1523 Et Rd.', '786-5441', 68421956, 'M', 21, 'Craft and related trades workers', 'GROUP7', 'N', 'Geylang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 35),
+(83, 'Asher Stanley', 'P.O. Box 694, 6194 Fringilla A', '695-9415', 68421957, 'F', 29, 'Clerical support workers', 'GROUP4', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(84, 'Neve Harrison', '673-5937 Id Avenue', '548-0900', 68421958, 'M', 25, 'Elementary occupations', 'GROUP9', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(85, 'Craig Tran', '978-3036 Semper Rd.', '728-7989', 68421959, 'M', 23, 'Craft and related trades workers', 'GROUP7', 'N', 'Bukit Merah', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 13),
+(86, 'Reuben Burgess', '938 Enim Rd.', '952-1926', 68421960, 'M', 30, 'Clerical support workers', 'GROUP4', 'N', 'Tampines', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 24),
+(87, 'Brianna Abbott', 'P.O. Box 225, 3145 Suscipit St', '252-6313', 68421961, 'F', 35, 'Armed forces occupations', 'GROUP10', 'N', 'Hougang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 33),
+(88, 'Clio Stanton', '7714 Et Rd.', '622-6400', 68421962, 'M', 30, 'Service and sales workers', 'GROUP5', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(89, 'George Morales', '952-6477 Habitant St.', '175-9048', 68421963, 'M', 35, 'Service and sales workers', 'GROUP5', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(90, 'Meghan Stafford', 'Ap #856-1275 Nunc, Rd.', '676-7976', 68421964, 'F', 35, 'Service and sales workers', 'GROUP5', 'N', 'Bedok', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 1),
+(91, 'Preston Clemons', '578-2058 Non, Avenue', '019-7007', 68421965, 'M', 34, 'Service and sales workers', 'GROUP5', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(92, 'Porter Fowler', '4397 Sit St.', '816-0910', 68421966, 'F', 39, 'Professionals', 'GROUP2', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(93, 'Judith Newton', 'P.O. Box 877, 1385 Fermentum R', '280-5749', 68421967, 'F', 34, 'Service and sales workers', 'GROUP5', 'N', 'Ang Mo Kio', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 28),
+(94, 'Linda Hogan', 'P.O. Box 172, 6371 Dui St.', '853-7325', 68421968, 'F', 31, 'Clerical support workers', 'GROUP4', 'N', 'Bukit Batok', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 29),
+(95, 'Jane Adams', 'Ap #658-2243 Magna Av.', '611-2089', 68421969, 'F', 36, 'Service and sales workers', 'GROUP5', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(96, 'Jane Daniels', 'Ap #702-9417 Amet, Rd.', '822-2670', 68421970, 'F', 45, 'Elementary occupations', 'GROUP9', 'N', 'Kallang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 27),
+(97, 'Gisela Middleton', '975-5195 Accumsan Road', '221-0312', 68421971, 'F', 30, 'Clerical support workers', 'GROUP4', 'N', 'Ang Mo Kio', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 28),
+(98, 'Leilani Cortez', '4868 Elit Rd.', '918-2847', 68421972, 'F', 40, 'Professionals', 'GROUP2', 'N', 'Bukit Merah', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 13),
+(99, 'Indira Hickman', 'P.O. Box 973, 5876 Elit Ave', '856-1389', 68421973, 'F', 24, 'Elementary occupations', 'GROUP9', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(100, 'Hedley Gutierrez', '532-2364 Sit Avenue', '517-0875', 68421974, 'M', 48, 'Professionals', 'GROUP2', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(101, 'Jacob Flores', '5765 Imperdiet Rd.', '050-1252', 68421975, 'M', 44, 'Professionals', 'GROUP2', 'N', 'Geylang', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 35),
+(102, 'Troy Joseph', 'Ap #987-3561 Amet Street', '542-7519', 68421976, 'M', 25, 'Armed forces occupations', 'GROUP10', 'N', 'Bukit Merah', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 13),
+(103, 'Murphy Watts', '725-6461 Ridiculus Av.', '723-3569', 68421977, 'M', 29, 'Clerical support workers', 'GROUP4', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(104, 'Clinton Foreman', '6318 Arcu. Rd.', '267-8604', 68421978, 'M', 38, 'Service and sales workers', 'GROUP5', 'Y', NULL, 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', NULL),
+(105, 'Jillian Wood', 'P.O. Box 922, 1851 Non Avenue', '007-2188', 68421979, 'F', 45, 'Professionals', 'GROUP2', 'N', 'Pasir Ris', 1, '1900-01-01 00:00:00', '2199-12-31 23:59:59', 31),
+(106, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -289,21 +291,52 @@ CREATE TABLE `dim_time` (
 --
 
 CREATE TABLE `region` (
-  `region_key` bigint(20) NOT NULL,
-  `region_name` text NOT NULL,
-  `area_name` text NOT NULL
+  `region_name` text DEFAULT NULL,
+  `area_name` text DEFAULT NULL,
+  `region_key` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `region`
 --
 
-INSERT INTO `region` (`region_key`, `region_name`, `area_name`) VALUES
-(1, 'East', 'Bedok, Tampines, Pasir Ris'),
-(2, 'West', 'Jurong West, Bukit Batok ,Bukit Panjan, Sembawang, Choa Chu Kang'),
-(3, 'North', 'Woodlands, Yishun'),
-(4, 'Central', 'Bukit Merah, Tao Payoh, Geylang, Kallang, Queenstown'),
-(5, 'North-East', 'Sengkang, Hougang, Punggol, Ang Mo Kio, Serangoon');
+INSERT INTO `region` (`region_name`, `area_name`, `region_key`) VALUES
+('East', 'Bedok', 1),
+('East', ' Tampines', 2),
+('East', ' Pasir Ris', 3),
+('East', NULL, 4),
+('West', 'Jurong West', 5),
+('West', ' Bukit Batok ', 6),
+('West', 'Bukit Panjang', 7),
+('West', ' Sembawang', 8),
+('West', ' Choa Chu Kang', 9),
+('North', 'Woodlands', 10),
+('North', ' Yishun', 11),
+('North', NULL, 12),
+('Central', 'Bukit Merah', 13),
+('Central', ' Tao Payoh', 14),
+('Central', ' Geylang', 15),
+('Central', ' Kallang', 16),
+('Central', ' Queenstown', 17),
+('North-East', 'Sengkang', 18),
+('North-East', ' Hougang', 19),
+('North-East', ' Punggol', 20),
+('North-East', ' Ang Mo Kio', 21),
+('North-East', ' Serangoon', 22),
+(NULL, 'Yishun', 23),
+(NULL, 'Tampines', 24),
+(NULL, 'Toa Payoh', 25),
+(NULL, 'Choa Chu Kang', 26),
+(NULL, 'Kallang', 27),
+(NULL, 'Ang Mo Kio', 28),
+(NULL, 'Bukit Batok', 29),
+(NULL, 'Punggol', 30),
+(NULL, 'Pasir Ris', 31),
+(NULL, 'Serangoon', 32),
+(NULL, 'Hougang', 33),
+(NULL, 'Sembawang', 34),
+(NULL, 'Geylang', 35),
+(NULL, 'Queenstown', 36);
 
 --
 -- Indexes for dumped tables
@@ -330,8 +363,8 @@ ALTER TABLE `dim_nurse`
 --
 ALTER TABLE `dim_patient`
   ADD PRIMARY KEY (`patient_key`),
-  ADD KEY `idx_dim_patient_lookup` (`name`(255)),
-  ADD KEY `idx_dim_patient_tk` (`patient_key`);
+  ADD KEY `idx_dim_patient_tk` (`patient_key`),
+  ADD KEY `idx_dim_patient_lookup` (`patient_key`);
 
 --
 -- Indexes for table `dim_time`
@@ -343,7 +376,9 @@ ALTER TABLE `dim_time`
 -- Indexes for table `region`
 --
 ALTER TABLE `region`
-  ADD PRIMARY KEY (`region_key`);
+  ADD PRIMARY KEY (`region_key`),
+  ADD UNIQUE KEY `idx_region_pk` (`region_key`),
+  ADD KEY `idx_region_lookup` (`region_name`(768));
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -365,7 +400,7 @@ ALTER TABLE `dim_nurse`
 -- AUTO_INCREMENT for table `dim_patient`
 --
 ALTER TABLE `dim_patient`
-  MODIFY `patient_key` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `patient_key` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `dim_time`
@@ -377,7 +412,7 @@ ALTER TABLE `dim_time`
 -- AUTO_INCREMENT for table `region`
 --
 ALTER TABLE `region`
-  MODIFY `region_key` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `region_key` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
