@@ -428,7 +428,7 @@
     <created_user>-</created_user>
     <created_date>2020/12/04 12:59:50.162</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2020/12/04 20:49:48.827</modified_date>
+    <modified_date>2020/12/07 13:40:16.545</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -496,16 +496,72 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Split fields</from>
-      <to>Row normaliser</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Row normaliser</from>
       <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Split fields</from>
+      <to>String operations</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>String operations</from>
+      <to>Row normaliser</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>hospitaldw</schema>
+    <table>region</table>
+    <connection>koneks hospitalDW</connection>
+    <commit>100</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>region</name>
+        <lookup>region_name</lookup>
+      </key>
+      <key>
+        <name>area</name>
+        <lookup>area_name</lookup>
+      </key>
+      <return>
+        <name>region_key</name>
+        <creation_method>autoinc</creation_method>
+        <use_autoinc>Y</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Get Region</name>
     <type>ExcelInput</type>
@@ -601,6 +657,59 @@
     </remotesteps>
     <GUI>
       <xloc>128</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Row normaliser</name>
+    <type>Normaliser</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <typefield>typefield</typefield>
+    <fields>
+      <field>
+        <name>a</name>
+        <value>a</value>
+        <norm>area</norm>
+      </field>
+      <field>
+        <name>b</name>
+        <value>b</value>
+        <norm>area</norm>
+      </field>
+      <field>
+        <name>c</name>
+        <value>c</value>
+        <norm>area</norm>
+      </field>
+      <field>
+        <name>d</name>
+        <value>d</value>
+        <norm>area</norm>
+      </field>
+      <field>
+        <name>e</name>
+        <value>e</value>
+        <norm>area</norm>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -711,8 +820,8 @@
     </GUI>
   </step>
   <step>
-    <name>Row normaliser</name>
-    <type>Normaliser</type>
+    <name>String operations</name>
+    <type>StringOperations</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -721,32 +830,71 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <typefield>typefield</typefield>
     <fields>
       <field>
-        <name>a</name>
-        <value>a</value>
-        <norm>area</norm>
+        <in_stream_name>a</in_stream_name>
+        <out_stream_name/>
+        <trim_type>left</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>N</init_cap>
+        <mask_xml>None</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
       </field>
       <field>
-        <name>b</name>
-        <value>b</value>
-        <norm>area</norm>
+        <in_stream_name>b</in_stream_name>
+        <out_stream_name/>
+        <trim_type>left</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>N</init_cap>
+        <mask_xml>None</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
       </field>
       <field>
-        <name>c</name>
-        <value>c</value>
-        <norm>area</norm>
+        <in_stream_name>c</in_stream_name>
+        <out_stream_name/>
+        <trim_type>left</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>N</init_cap>
+        <mask_xml>None</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
       </field>
       <field>
-        <name>d</name>
-        <value>d</value>
-        <norm>area</norm>
+        <in_stream_name>d</in_stream_name>
+        <out_stream_name/>
+        <trim_type>left</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>N</init_cap>
+        <mask_xml>None</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
       </field>
       <field>
-        <name>e</name>
-        <value>e</value>
-        <norm>area</norm>
+        <in_stream_name>e</in_stream_name>
+        <out_stream_name/>
+        <trim_type>left</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>N</init_cap>
+        <mask_xml>None</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
       </field>
     </fields>
     <attributes/>
@@ -758,58 +906,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>hospitaldw</schema>
-    <table>region</table>
-    <connection>koneks hospitalDW</connection>
-    <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>region</name>
-        <lookup>region_name</lookup>
-      </key>
-      <key>
-        <name>area</name>
-        <lookup>area_name</lookup>
-      </key>
-      <return>
-        <name>region_key</name>
-        <creation_method>autoinc</creation_method>
-        <use_autoinc>Y</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>624</xloc>
+      <xloc>416</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
