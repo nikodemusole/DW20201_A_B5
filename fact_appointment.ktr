@@ -428,7 +428,7 @@
     <created_user>-</created_user>
     <created_date>2020/12/05 21:24:04.748</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2020/12/07 13:57:54.794</modified_date>
+    <modified_date>2020/12/07 14:02:33.743</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -544,6 +544,61 @@
       </attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>koneks hospitalDW</name>
+    <server>localhost</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>hospitaldw</database>
+    <port>3306</port>
+    <username>root</username>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>3306</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <order>
     <hop>
       <from>Lookup patientkey</from>
@@ -553,6 +608,26 @@
     <hop>
       <from>Lookup nursekey</from>
       <to>Lookup physiciankey</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup physiciankey</from>
+      <to>Lookup Medcode &amp; Dose</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup Medcode &amp; Dose</from>
+      <to>Lookup price</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup price</from>
+      <to>Lookup medkey</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup medkey</from>
+      <to>lookupTimekey</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -566,11 +641,54 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Lookup physiciankey</from>
-      <to>Lookup Medcode &amp; Dose</to>
+      <from>lookupTimekey</from>
+      <to>Formula</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Formula</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>insertFact</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Formula</name>
+    <type>Formula</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <formula>
+      <field_name>TotalCost</field_name>
+      <formula_string>[AppointmentCost]+([Price]*[Dose])</formula_string>
+      <value_type>BigNumber</value_type>
+      <value_length>5</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field/>
+    </formula>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Lookup Medcode &amp; Dose</name>
     <type>DBLookup</type>
@@ -601,7 +719,7 @@
       <value>
         <name>Medication</name>
         <rename>MedCode</rename>
-        <default>0</default>
+        <default/>
         <type>Integer</type>
       </value>
       <value>
@@ -620,7 +738,64 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
+      <xloc>656</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup medkey</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>hospitaldw</schema>
+    <table>dim_medication</table>
+    <connection>hospitaldw</connection>
+    <commit>100</commit>
+    <update>N</update>
+    <fields>
+      <key>
+        <name>MedCode</name>
+        <lookup>MedCode</lookup>
+      </key>
+      <date>
+        <name/>
+        <from>date_from</from>
+        <to>date_to</to>
+      </date>
+      <return>
+        <name>MedKey</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>version</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -677,7 +852,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
+      <xloc>496</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
@@ -734,7 +909,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
+      <xloc>320</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
@@ -791,8 +966,65 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
+      <xloc>656</xloc>
       <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup price</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>hospitaldw</schema>
+    <table>dim_medication</table>
+    <connection>hospitaldw</connection>
+    <commit>100</commit>
+    <update>N</update>
+    <fields>
+      <key>
+        <name>MedCode</name>
+        <lookup>MedCode</lookup>
+      </key>
+      <date>
+        <name/>
+        <from>date_from</from>
+        <to>date_to</to>
+      </date>
+      <return>
+        <name>Price</name>
+        <rename/>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+        <version>version</version>
+      </return>
+    </fields>
+    <sequence/>
+    <min_year>1900</min_year>
+    <max_year>2199</max_year>
+    <cache_size>5000</cache_size>
+    <preload_cache>N</preload_cache>
+    <use_start_date_alternative>N</use_start_date_alternative>
+    <start_date_alternative>none</start_date_alternative>
+    <start_date_field_name/>
+    <useBatch>N</useBatch>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -810,6 +1042,85 @@
     <fields>
       <field>
         <name>AppointmentID</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Patient</name>
+        <rename/>
+      </field>
+      <field>
+        <name>PrepNurse</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Physician</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Start</name>
+        <rename/>
+      </field>
+      <field>
+        <name>End</name>
+        <rename/>
+      </field>
+      <field>
+        <name>AppointmentCost</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>Start</name>
+        <rename>Start</rename>
+        <type>String</type>
+        <length>30</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy/MM/dd</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>patient_key</name>
+      </field>
+      <field>
+        <name>nursekey</name>
+      </field>
+      <field>
+        <name>physician_key</name>
       </field>
       <field>
         <name>Patient</name>
@@ -821,6 +1132,15 @@
         <name>Physician</name>
       </field>
       <field>
+        <name>MedKey</name>
+      </field>
+      <field>
+        <name>MedCode</name>
+      </field>
+      <field>
+        <name>timekey</name>
+      </field>
+      <field>
         <name>Start</name>
       </field>
       <field>
@@ -828,6 +1148,16 @@
       </field>
       <field>
         <name>AppointmentCost</name>
+      </field>
+      <field>
+        <name>Dose</name>
+      </field>
+      <field>
+        <name>Price</name>
+        <rename>MedicationCost</rename>
+      </field>
+      <field>
+        <name>TotalCost</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -840,8 +1170,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>96</yloc>
+      <xloc>80</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -880,7 +1210,7 @@ FROM hospital.appointment
         <name>AppointmentID</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>input apointment</origin>
         <comments>AppointmentID</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -903,7 +1233,7 @@ FROM hospital.appointment
         <name>Patient</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>input apointment</origin>
         <comments>Patient</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -926,7 +1256,7 @@ FROM hospital.appointment
         <name>PrepNurse</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>input apointment</origin>
         <comments>PrepNurse</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -949,7 +1279,7 @@ FROM hospital.appointment
         <name>Physician</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>input apointment</origin>
         <comments>Physician</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -972,7 +1302,7 @@ FROM hospital.appointment
         <name>Start</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>input apointment</origin>
         <comments>Start</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -995,7 +1325,7 @@ FROM hospital.appointment
         <name>End</name>
         <length>0</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>input apointment</origin>
         <comments>End</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1018,7 +1348,7 @@ FROM hospital.appointment
         <name>AppointmentCost</name>
         <length>10</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>input apointment</origin>
         <comments>AppointmentCost</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1047,6 +1377,98 @@ FROM hospital.appointment
     <GUI>
       <xloc>80</xloc>
       <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>insertFact</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>hospitaldw</connection>
+    <schema>hospitaldw</schema>
+    <table>fact_appointment</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>N</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>Y</return_keys>
+    <return_field>AppointmentID</return_field>
+    <fields>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>lookupTimekey</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>koneks hospitalDW</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>hospitaldw</schema>
+      <table>dim_time</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>Start</name>
+        <field>DateAltKey</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>timekey</name>
+        <rename>timekey</rename>
+        <default/>
+        <type>BigNumber</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
